@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: ipchat
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /healthz
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: TEAM_CODE
+        sync: false   # Render te demande la valeur au moment du déploiement

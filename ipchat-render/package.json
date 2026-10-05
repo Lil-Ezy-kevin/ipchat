@@ -1,0 +1,13 @@
+{
+  "name": "ipchat",
+  "version": "3.0.0",
+  "private": true,
+  "description": "IPChat : chat d équipe (Node 14+, sans module natif)",
+  "main": "server.js",
+  "engines": { "node": ">=14" },
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  }
+}

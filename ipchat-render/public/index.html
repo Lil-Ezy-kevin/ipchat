@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#4d0096">
+<title>IPChat</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+
+  <section id="splash" class="view">
+    <svg class="logo" viewBox="0 0 120 120" role="img" aria-label="Logo IPChat">
+      <rect width="120" height="120" rx="28" fill="#4d0096"/>
+      <path d="M26 38a10 10 0 0 1 10-10h48a10 10 0 0 1 10 10v28a10 10 0 0 1-10 10H58L40 92V76h-4a10 10 0 0 1-10-10z" fill="#fff"/>
+      <circle cx="46" cy="52" r="5" fill="#4d0096"/><circle cx="60" cy="52" r="5" fill="#4d0096"/><circle cx="74" cy="52" r="5" fill="#4d0096"/>
+    </svg>
+    <h1 class="name" tabindex="0">IPChats</h1>
+    <p>Discutez, retrouvez-vous.</p>
+    <button class="btn" id="start">Commencer</button>
+  </section>
+
+  <section id="auth" class="view" hidden>
+    <form id="authForm" class="card">
+      <h2>IPChat</h2>
+      <label>Nom<input id="name" type="text" autocomplete="username" required></label>
+      <label>Mot de passe<input id="pw" type="password" autocomplete="current-password" required></label>
+      <label id="codeRow" hidden>Code d'équipe<input id="code" type="password"></label>
+      <p id="err" class="error" role="alert"></p>
+      <button class="btn" id="go">Se connecter</button>
+      <button class="link" type="button" id="toggle">Créer un compte</button>
+    </form>
+  </section>
+
+  <section id="home" class="view" hidden>
+    <header class="top">
+      <h1>IPChat</h1>
+      <div class="menuwrap">
+        <button class="icon" data-menu="homeMenu" aria-label="Menu">⋮</button>
+        <div class="menu" id="homeMenu" hidden>
+          <button data-go="profile">Profil</button>
+          <button data-go="settings">Réglages</button>
+          <button class="logout">Se déconnecter</button>
+        </div>
+      </div>
+    </header>
+    <div class="search">
+      <input id="search" type="search" placeholder="Rechercher une discussion" aria-label="Rechercher">
+      <button class="icon dark" id="addRoom" aria-label="Nouveau salon">+</button>
+    </div>
+    <form id="roomForm" class="search" hidden>
+      <input id="roomName" type="text" maxlength="30" placeholder="Nom du nouveau salon" aria-label="Nom du salon">
+      <button class="btn">Créer</button>
+    </form>
+    <ul id="list" class="chatlist"></ul>
+  </section>
+
+  <section id="chat" class="view" hidden>
+    <header class="top">
+      <button class="icon" data-go="home" aria-label="Retour">←</button>
+      <span id="chatAvatar"></span>
+      <div class="grow"><div id="chatTitle" class="title"></div><div id="chatSub" class="sub"></div></div>
+      <div class="menuwrap">
+        <button class="icon" data-menu="chatMenu" aria-label="Options">⋮</button>
+        <div class="menu" id="chatMenu" hidden>
+          <button id="clearBtn">Effacer l'écran</button>
+          <button id="blockBtn">Bloquer</button>
+        </div>
+      </div>
+    </header>
+    <div id="log" aria-live="polite"></div>
+    <form id="send">
+      <label id="attach" for="file" title="Joindre un fichier (10 Mo max)">+</label>
+      <input id="file" type="file" hidden>
+      <input id="text" type="text" placeholder="Écrire un message" aria-label="Message" autocomplete="off" maxlength="2000">
+      <button class="btn">Envoyer</button>
+    </form>
+  </section>
+
+  <section id="profile" class="view" hidden>
+    <header class="top"><button class="icon" data-go="home" aria-label="Retour">←</button><h1>Profil</h1></header>
+    <div class="card center">
+      <span id="pAvatar"></span>
+      <h2 id="pName"></h2>
+      <p id="pSince" class="sub"></p>
+      <p id="pCount"></p>
+    </div>
+  </section>
+
+  <section id="settings" class="view" hidden>
+    <header class="top"><button class="icon" data-go="home" aria-label="Retour">←</button><h1>Réglages</h1></header>
+    <div class="card">
+      <label>Thème
+        <select id="theme"><option value="light">Clair</option><option value="dark">Sombre</option></select>
+      </label>
+      <label class="check"><input id="notify" type="checkbox"> Notifications des messages privés</label>
+      <form id="pwForm">
+        <h3>Changer le mot de passe</h3>
+        <label>Ancien<input id="oldPw" type="password" autocomplete="current-password" required></label>
+        <label>Nouveau (6 caractères min.)<input id="newPw" type="password" autocomplete="new-password" minlength="6" required></label>
+        <p id="pwMsg" role="status"></p>
+        <button class="btn">Mettre à jour</button>
+      </form>
+      <button class="btn danger logout" type="button">Se déconnecter</button>
+    </div>
+  </section>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
